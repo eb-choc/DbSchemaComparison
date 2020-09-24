@@ -15,6 +15,7 @@ namespace DbSchemaComparison
 {
     public class MainContext
     {
+        //主表单
         private MainForm mainForm = null;
         private string conn_source_str = null;
         private string conn_target_str = null;
