@@ -85,6 +85,7 @@ namespace DbSchemaComparison
 
             Action<DbConnectionDO, string, string, int> act = StartReset;
             act.BeginInvoke(c, dbname, tablename, startNum, null, null);
+            button1.Enabled = false;
         }
 
         private void StartReset(DbConnectionDO conn, string dbname, string tablename, int startNum)
