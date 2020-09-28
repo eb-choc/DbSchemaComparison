@@ -65,5 +65,26 @@ namespace DbSchemaComparison.tools
             }
             return dt;
         }
+
+        public Object GetFirstValue(string sql, string[] ps = null, object[] vs = null)
+        {
+            object ret = null;
+            using (MySqlConnection conn = new MySqlConnection(ConnectionString))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                cmd.CommandTimeout = 3000;
+                if (ps != null)
+                {
+                    for (int i = 0; i < ps.Length; i++)
+                    {
+                        cmd.Parameters.Add(new MySqlParameter(ps[i], vs[i]));
+                    }
+                }
+                ret = cmd.ExecuteScalar();
+                conn.Close();
+            }
+            return ret;
+        }
     }
 }

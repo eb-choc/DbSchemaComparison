@@ -16,11 +16,15 @@ namespace DbSchemaComparison
     {
         private List<DbConnectionDO> connections = new List<DbConnectionDO>();
         private string defaultTitle = "";
+        private MsgForm msfForm = null;
         public MainForm()
         {
             InitializeComponent();
             刷新数据库连接ToolStripMenuItem_Click(null, null);
             defaultTitle = this.Text;
+            msfForm = new MsgForm();
+            msfForm.Show();
+            //msfForm.Visible = false;
         }
 
         private void 新建数据库连接NToolStripMenuItem_Click(object sender, EventArgs e)
@@ -128,7 +132,7 @@ namespace DbSchemaComparison
             string source_db = comboBox3.SelectedItem.ToString();
             string target_db = comboBox4.SelectedItem.ToString();
             button1.Enabled = false;
-            MainContext context = new MainContext(this);
+            MainContext context = new MainContext(this, msfForm);
             Action<DbConnectionDO, String, DbConnectionDO, String> act = context.BeginCompare;
             act.BeginInvoke(source_c, source_db, target_c, target_db, null, null);
         }
@@ -166,6 +170,12 @@ namespace DbSchemaComparison
             {
                 this.Text = defaultTitle + " --- " + title;
             }
+        }
+
+        private void 重置表ID值ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ResetIDForm f = new ResetIDForm(msfForm);
+            f.ShowDialog();
         }
     }
 }

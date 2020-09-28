@@ -23,11 +23,13 @@ namespace DbSchemaComparison
         private List<String> targetDbs = new List<string>();
 
         private StringBuilder sb = new StringBuilder();
+        private MsgForm msgForm = null;
 
         public void BeginCompare(DbConnectionDO source_conn, string source_db, DbConnectionDO target_conn, string target_db)
         {
             conn_source_str = "server=" + source_conn.HOST + ";port=" + source_conn.PORT + ";user=" + source_conn.UserName + ";password=" + source_conn.Pwd + "; database=" + source_db + ";";
             conn_target_str = "server=" + target_conn.HOST + ";port=" + target_conn.PORT + ";user=" + target_conn.UserName + ";password=" + target_conn.Pwd + "; database=" + target_db + ";";
+            msgForm.ClearText();
             CompareDbSchemaField(source_conn, source_db, target_conn, target_db);
         }
 
@@ -43,9 +45,10 @@ namespace DbSchemaComparison
                 {
                     string sd = sourceDbs[i];
                     mainForm.SetTitle("比较" + sd);
+                    msgForm.SetText("比较" + sd);
                     int process = Convert.ToInt32((i + 1) * 100 / sourceDbs.Count * 0.8);
                     mainForm.SetProcessBar(10 + process);
-                    string sql_s = "show columns from " + sd;
+                    string sql_s = "show columns from `" + sd + "`";
                     DataTable dt_s = new MySqlDbHelper(conn_source_str).RunDataTableSql(sql_s);
                     List<string> fields_s = new List<string>();
                     if(dt_s != null && dt_s.Rows.Count > 0)
@@ -64,8 +67,9 @@ namespace DbSchemaComparison
                 }
             }
             mainForm.SetTitle("删除多余表...");
+            msgForm.SetText("删除多余表...");
             //在source没有，但是target有的要删除
-            if(targetDbs != null && targetDbs.Count > 0 && targetFound.Count > 0)
+            if (targetDbs != null && targetDbs.Count > 0 && targetFound.Count > 0)
             {
                 foreach(string table in targetDbs)
                 {
@@ -79,6 +83,7 @@ namespace DbSchemaComparison
             {
                 mainForm.SetProcessBar(95);
                 mainForm.SetTitle("写入文件...");
+                msgForm.SetText("写入文件...");
                 string dir = AppDomain.CurrentDomain.BaseDirectory + "\\sql";
                 if (!Directory.Exists(dir))
                 {
@@ -97,6 +102,7 @@ namespace DbSchemaComparison
                 mainForm.SetProcessBar(100);
                 MessageBox.Show("很好， 两边数据库结构无差异！");
             }
+            msgForm.SetText("完成");
         }
 
         private void CompareTable(DataTable dt_s, DataTable dt_t, string table)
@@ -197,9 +203,11 @@ namespace DbSchemaComparison
             string sql_table1 = "select table_name from information_schema.Tables where table_schema = DATABASE()";
 
             mainForm.SetTitle("获取源数据库视图清单...");
+            msgForm.SetText("获取源数据库视图清单...");
             DataTable dt_view1 = new MySqlDbHelper(conn_source_str).RunDataTableSql(sql_view1);
             mainForm.SetProcessBar(2);
             mainForm.SetTitle("获取源数据库表清单...");
+            msgForm.SetText("获取源数据库表清单...");
             DataTable dt_table1 = new MySqlDbHelper(conn_source_str).RunDataTableSql(sql_table1);
             mainForm.SetProcessBar(5);
             if (dt_table1 != null && dt_table1.Rows.Count > 0)
@@ -225,9 +233,11 @@ namespace DbSchemaComparison
                 }
             }
             mainForm.SetTitle("获取目标数据库视图清单...");
+            msgForm.SetText("获取目标数据库视图清单...");
             DataTable dt_view2 = new MySqlDbHelper(conn_target_str).RunDataTableSql(sql_view1);
             mainForm.SetProcessBar(7);
             mainForm.SetTitle("获取目标数据库表清单...");
+            msgForm.SetText("获取目标数据库表清单...");
             DataTable dt_table2 = new MySqlDbHelper(conn_target_str).RunDataTableSql(sql_table1);
             mainForm.SetProcessBar(10);
             if (dt_table2 != null && dt_table2.Rows.Count > 0)
@@ -254,9 +264,10 @@ namespace DbSchemaComparison
             }
         }
 
-        public MainContext(MainForm f)
+        public MainContext(MainForm f, MsgForm mf)
         {
             this.mainForm = f;
+            this.msgForm = mf;
         }
     }
 }
