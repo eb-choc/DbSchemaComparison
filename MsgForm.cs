@@ -12,6 +12,7 @@ namespace DbSchemaComparison
 {
     public partial class MsgForm : Form
     {
+        public bool IsWorking = false;
         public MsgForm()
         {
             InitializeComponent();

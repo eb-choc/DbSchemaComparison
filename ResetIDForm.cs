@@ -77,6 +77,11 @@ namespace DbSchemaComparison
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if(msgForm.IsWorking)
+            {
+                MessageBox.Show("前一个任务还没有执行完成，请等待！");
+                return;
+            }
             string name = comboBox1.SelectedItem.ToString();
             DbConnectionDO c = GetByName(name);
             string dbname = comboBox2.SelectedItem.ToString();
@@ -90,6 +95,7 @@ namespace DbSchemaComparison
 
         private void StartReset(DbConnectionDO conn, string dbname, string tablename, int startNum)
         {
+            msgForm.IsWorking = true;
             string conn_str = "server=" + conn.HOST + ";port=" + conn.PORT + ";user=" + conn.UserName + ";password=" + conn.Pwd + "; database=" + dbname + ";";
             msgForm.ClearText();
             msgForm.SetText("正在查询数据记录相关信息");
@@ -148,12 +154,13 @@ namespace DbSchemaComparison
             int index = 0;
             foreach(string s in sb_updateid)
             {
-                msgForm.SetText("执行更新第" + (index + 1) + "批");
+                msgForm.SetText("执行更新第" + (index + 1) + "批，剩" + (sb_updateid.Count - index - 1));
                 new MySqlDbHelper(dbhelper.ConnectionString).RunSql(s, null, null, trans);
                 index++;
             }
             trans.Commit();
             msgForm.SetText("执行完成");
+            msgForm.IsWorking = false;
         }
 
         private int ExecResetId(MySqlDbHelper dbhelper, string sql, string tablename, int startNum,

@@ -27,6 +27,11 @@ namespace DbSchemaComparison
 
         public void BeginCompare(DbConnectionDO source_conn, string source_db, DbConnectionDO target_conn, string target_db)
         {
+            if (msgForm.IsWorking)
+            {
+                MessageBox.Show("前一个任务还没有执行完成，请等待！");
+                return;
+            }
             conn_source_str = "server=" + source_conn.HOST + ";port=" + source_conn.PORT + ";user=" + source_conn.UserName + ";password=" + source_conn.Pwd + "; database=" + source_db + ";";
             conn_target_str = "server=" + target_conn.HOST + ";port=" + target_conn.PORT + ";user=" + target_conn.UserName + ";password=" + target_conn.Pwd + "; database=" + target_db + ";";
             msgForm.ClearText();
@@ -35,6 +40,7 @@ namespace DbSchemaComparison
 
         private void CompareDbSchemaField(DbConnectionDO source_conn, string source_db, DbConnectionDO target_conn, string target_db)
         {
+            msgForm.IsWorking = true;
             //1、获取表列表
             InitTableList();
             List<string> targetFound = new List<string>(); //目标表中已经找到的表名称
@@ -103,6 +109,7 @@ namespace DbSchemaComparison
                 MessageBox.Show("很好， 两边数据库结构无差异！");
             }
             msgForm.SetText("完成");
+            msgForm.IsWorking = false;
         }
 
         private void CompareTable(DataTable dt_s, DataTable dt_t, string table)
