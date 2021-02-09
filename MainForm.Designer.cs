@@ -35,6 +35,8 @@
             this.数据库连接管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.刷新数据库连接ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.工具TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.重置表ID值ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -67,8 +69,6 @@
             this.lbl_type2 = new System.Windows.Forms.Label();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.工具TToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.重置表ID值ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -88,7 +88,7 @@
             this.工具TToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1610, 42);
+            this.menuStrip1.Size = new System.Drawing.Size(1610, 48);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -100,34 +100,49 @@
             this.toolStripMenuItem1,
             this.刷新数据库连接ToolStripMenuItem});
             this.连接CToolStripMenuItem.Name = "连接CToolStripMenuItem";
-            this.连接CToolStripMenuItem.Size = new System.Drawing.Size(114, 38);
+            this.连接CToolStripMenuItem.Size = new System.Drawing.Size(114, 40);
             this.连接CToolStripMenuItem.Text = "连接(&C)";
             // 
             // 新建数据库连接NToolStripMenuItem
             // 
             this.新建数据库连接NToolStripMenuItem.Name = "新建数据库连接NToolStripMenuItem";
-            this.新建数据库连接NToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.新建数据库连接NToolStripMenuItem.Size = new System.Drawing.Size(351, 44);
             this.新建数据库连接NToolStripMenuItem.Text = "新建数据库连接(&N)";
             this.新建数据库连接NToolStripMenuItem.Click += new System.EventHandler(this.新建数据库连接NToolStripMenuItem_Click);
             // 
             // 数据库连接管理ToolStripMenuItem
             // 
             this.数据库连接管理ToolStripMenuItem.Name = "数据库连接管理ToolStripMenuItem";
-            this.数据库连接管理ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.数据库连接管理ToolStripMenuItem.Size = new System.Drawing.Size(351, 44);
             this.数据库连接管理ToolStripMenuItem.Text = "数据库连接管理";
             this.数据库连接管理ToolStripMenuItem.Click += new System.EventHandler(this.数据库连接管理ToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(356, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(348, 6);
             // 
             // 刷新数据库连接ToolStripMenuItem
             // 
             this.刷新数据库连接ToolStripMenuItem.Name = "刷新数据库连接ToolStripMenuItem";
-            this.刷新数据库连接ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
+            this.刷新数据库连接ToolStripMenuItem.Size = new System.Drawing.Size(351, 44);
             this.刷新数据库连接ToolStripMenuItem.Text = "刷新数据库连接";
             this.刷新数据库连接ToolStripMenuItem.Click += new System.EventHandler(this.刷新数据库连接ToolStripMenuItem_Click);
+            // 
+            // 工具TToolStripMenuItem
+            // 
+            this.工具TToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.重置表ID值ToolStripMenuItem});
+            this.工具TToolStripMenuItem.Name = "工具TToolStripMenuItem";
+            this.工具TToolStripMenuItem.Size = new System.Drawing.Size(112, 40);
+            this.工具TToolStripMenuItem.Text = "工具(&T)";
+            // 
+            // 重置表ID值ToolStripMenuItem
+            // 
+            this.重置表ID值ToolStripMenuItem.Name = "重置表ID值ToolStripMenuItem";
+            this.重置表ID值ToolStripMenuItem.Size = new System.Drawing.Size(268, 44);
+            this.重置表ID值ToolStripMenuItem.Text = "重置表ID值";
+            this.重置表ID值ToolStripMenuItem.Click += new System.EventHandler(this.重置表ID值ToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
@@ -171,7 +186,7 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 42);
+            this.splitContainer1.Location = new System.Drawing.Point(0, 48);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -182,7 +197,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer1.Size = new System.Drawing.Size(1610, 883);
+            this.splitContainer1.Size = new System.Drawing.Size(1610, 877);
             this.splitContainer1.SplitterDistance = 791;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -205,7 +220,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(791, 883);
+            this.groupBox1.Size = new System.Drawing.Size(791, 877);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "源数据库";
@@ -358,7 +373,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(815, 883);
+            this.groupBox2.Size = new System.Drawing.Size(815, 877);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "目标数据库";
@@ -450,21 +465,6 @@
             this.comboBox2.Size = new System.Drawing.Size(383, 32);
             this.comboBox2.TabIndex = 1;
             this.comboBox2.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
-            // 
-            // 工具TToolStripMenuItem
-            // 
-            this.工具TToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.重置表ID值ToolStripMenuItem});
-            this.工具TToolStripMenuItem.Name = "工具TToolStripMenuItem";
-            this.工具TToolStripMenuItem.Size = new System.Drawing.Size(112, 38);
-            this.工具TToolStripMenuItem.Text = "工具(&T)";
-            // 
-            // 重置表ID值ToolStripMenuItem
-            // 
-            this.重置表ID值ToolStripMenuItem.Name = "重置表ID值ToolStripMenuItem";
-            this.重置表ID值ToolStripMenuItem.Size = new System.Drawing.Size(359, 44);
-            this.重置表ID值ToolStripMenuItem.Text = "重置表ID值";
-            this.重置表ID值ToolStripMenuItem.Click += new System.EventHandler(this.重置表ID值ToolStripMenuItem_Click);
             // 
             // MainForm
             // 

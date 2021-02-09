@@ -171,6 +171,12 @@
     <Compile Include="ResetIDForm.Designer.cs">
       <DependentUpon>ResetIDForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmTK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTK.Designer.cs">
+      <DependentUpon>frmTK.cs</DependentUpon>
+    </Compile>
     <Compile Include="tools\DbConnectionDO.cs" />
     <Compile Include="tools\DbHelper.cs" />
     <Compile Include="tools\MySqlDbHelper.cs" />
@@ -197,6 +203,9 @@
     </Compile>
     <EmbeddedResource Include="ResetIDForm.resx">
       <DependentUpon>ResetIDForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTK.resx">
+      <DependentUpon>frmTK.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="db\data.db" />
     <None Include="packages.config" />

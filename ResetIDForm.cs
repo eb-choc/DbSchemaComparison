@@ -82,6 +82,17 @@ namespace DbSchemaComparison
                 MessageBox.Show("前一个任务还没有执行完成，请等待！");
                 return;
             }
+            
+            frmTK tk = new frmTK();
+            if(tk.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+            if (comboBox1.SelectedItem == null)
+            {
+                MessageBox.Show("请选择一个具体表！");
+                return;
+            }
             string name = comboBox1.SelectedItem.ToString();
             DbConnectionDO c = GetByName(name);
             string dbname = comboBox2.SelectedItem.ToString();
@@ -158,6 +169,8 @@ namespace DbSchemaComparison
                 new MySqlDbHelper(dbhelper.ConnectionString).RunSql(s, null, null, trans);
                 index++;
             }
+            sql = "alter table event_log AUTO_INCREMENT " + (count + 1); //从新的数字开始数数
+            new MySqlDbHelper(dbhelper.ConnectionString).RunSql(sql, null, null, trans);
             trans.Commit();
             msgForm.SetText("执行完成");
             msgForm.IsWorking = false;

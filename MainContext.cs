@@ -97,7 +97,7 @@ namespace DbSchemaComparison
                 }
                 string file = dir + "\\sql_" + DateTime.Now.ToString("yyyyMMdd") + ".sql";
                 File.WriteAllText(file, sb.ToString());
-                mainForm.SetProcessBar(100);
+                mainForm.SetProcessBar(100);                
                 MessageBox.Show("操作成功，点击确定打开文件！", "恭喜", MessageBoxButtons.OK);
                 Process.Start(file);
                 mainForm.SetTitle("");
@@ -108,6 +108,7 @@ namespace DbSchemaComparison
                 mainForm.SetProcessBar(100);
                 MessageBox.Show("很好， 两边数据库结构无差异！");
             }
+            GC.Collect();
             msgForm.SetText("完成");
             msgForm.IsWorking = false;
         }
